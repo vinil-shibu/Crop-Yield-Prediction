@@ -1,0 +1,115 @@
+{% load static %}
+<html>
+
+<head>
+    <title> Predicted Yield</title>
+    <style>
+        body {
+            background-color: #0091f9;
+            background-size: cover;
+            border: 2px solid;
+            border-radius: 10px;
+        }
+
+        body,
+        div,
+        form,
+        input,
+        select,
+        textarea,
+        label {
+            padding: 10px;
+            margin: 2px solid;
+            outline: none;
+            font-family: cambria;
+            font-size: 14px;
+            font-weight: bold;
+            color: black;
+            line-height: 20px;
+
+        }
+
+        .testbox {
+            display: flex;
+            padding: 20px;
+        }
+
+        .item {
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .colums {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .colums div {
+            width: 48%;
+        }
+
+        .btn-block {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        button {
+            width: 150px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #1c87c9;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0692e8;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <br>
+        <h2><u>Based on the details given:</u></h2>
+    </div>
+    <div class="testbox">
+        <div class="colums">
+            <div class="item">
+                <h2>Crop : {{crop}}</h2>
+            </div>
+
+            <div class="item">
+                <h2>RainFall : {{rain}}</h2>
+            </div>
+
+            <div class="item">
+                <h2>Pesticide : {{pesticide}}</h2>
+            </div>
+
+            <div class="item">
+                <h2>Year : {{year}}</h2>
+            </div>
+
+            <div class="item">
+                <h2>Average Temperature : {{avg_temp}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <p style="color:rgb(255, 255, 255);font-size:30px;"> Result : The yield Produced will be {{predict}} hg/ha</p>
+    </div>
+    <form method="get" action="/">
+        <div class="btn-block">
+            <h3>
+                <center><button type="submit">LOGOUT</button></center>
+            </h3>
+        </div>
+    </form>
+</body>
+
+</html>
