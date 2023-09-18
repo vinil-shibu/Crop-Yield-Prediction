@@ -19,7 +19,6 @@ def home(request):
         Crop=int(request.POST['crop'])
         Rain=int(request.POST['rain'])
         Pesticide=int(request.POST['pesticide'])
-        Year=int(request.POST['year'])
         Avg_temp=int(request.POST['avg_temp'])
 
         df = pd.read_csv(r"static/Datasets/yield.csv")
