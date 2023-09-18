@@ -22,20 +22,7 @@ def home(request):
         Avg_temp=int(request.POST['avg_temp'])
 
         df = pd.read_csv(r"static/Datasets/yield.csv")
-        # x=df.drop(["yield","Area","ID"],axis=1)
-        # y=df["yield"]
-
-        # e=LabelEncoder()
-        # item=e.fit_transform(x['Item'])
-        # x['Crop']=item
-        # X=x.drop('Item',axis=1)
-
-        # X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.34)
-        # #X_train=X[['Year','avg_rainfall_','pest_ton','avg_temp','Crop']]
-        # y_train=df['yield']
-        # reg=LinearRegression()
-        # reg.fit(X_train,y_train)
-        x=df.drop(["yield","Area","ID"],axis=1)
+        x=df.drop(["yield","Area","ID","Year"],axis=1)
         y=df["yield"]
 
         e=LabelEncoder()
@@ -46,11 +33,11 @@ def home(request):
         X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.34,shuffle=True)
         reg=RandomForestRegressor()
         reg.fit(X_train,y_train)
-        pred=reg.predict([[Year,Rain,Pesticide,Avg_temp,Crop]])
-        yld=yield_data.objects.create(crop=Crop,rain=Rain,pesticide=Pesticide,year=Year,avg_temp=Avg_temp)
+        pred=reg.predict([[Rain,Pesticide,Avg_temp,Crop]])
+        yld=yield_data.objects.create(crop=Crop,rain=Rain,pesticide=Pesticide,year=2023,avg_temp=Avg_temp)
         yld.save()
         prey=int(pred)
-        return render(request,'p_yield.html',{'predict':prey,'crop':Crop,'rain':Rain,'pesticide':Pesticide,'year':Year,'avg_temp':Avg_temp})
+        return render(request,'p_yield.html',{'predict':prey,'crop':Crop,'rain':Rain,'pesticide':Pesticide,'avg_temp':Avg_temp})
     else:
         messages.info(request,"Enter the Input Values")
         return render(request,'home.html')
